@@ -25,7 +25,8 @@ class Usuario(AbstractBaseUser):
     email = models.CharField(max_length=80)
     password = models.TextField()
     status = models.BooleanField('Status', default=True)
-    perfil = models.CharField('Perfil', max_length=1, default='C')   
+    perfil = models.CharField('Perfil', max_length=1, default='C')
+    celular = models.CharField(max_length=11, blank=True, null=True)
 
     # criando qual o campo de identificação do 'USUARIO'
     USERNAME_FIELD = 'ra'
@@ -37,7 +38,7 @@ class Usuario(AbstractBaseUser):
 
     # criando a função de apresentação do 'USUARIO'
     def __str__(self):
-        return self.nome
+        return self.nome + '(' + str(self.ra) + ')'
 
     # criando as funcoes de como ira mostra o nome do 'USUARIO' nos Templates
     
@@ -57,42 +58,11 @@ class Usuario(AbstractBaseUser):
     def is_staff(self):
         return self.perfil == 'C'
     
-class Aluno(AbstractBaseUser):
-    nome = models.CharField(max_length=120)
-    ra = models.IntegerField(unique=True)
-    password = models.TextField()
-    status = models.BooleanField(default=True)
-    email = models.CharField(max_length=80, blank=True, null=True)
-    perfil = models.CharField(max_length=1, blank=True, default='A')
-    celular = models.CharField(max_length=11, blank=True, null=True)
-
-    USERNAME_FIELD = 'ra'
-    REQUIRED_FIELDS = ['nome','email']
-
-    def __str__(self):
-        return self.nome + '(' + str(self.ra) + ')'
-    class Meta:
-        managed = False
-        db_table = 'aluno'
-
-
-class Professor(AbstractBaseUser):
-    nome = models.CharField(max_length=120)
-    ra = models.IntegerField(unique=True)
-    password = models.TextField()
-    status = models.BooleanField(default=True)
-    email = models.CharField(max_length=80, blank=True, null=True)
-    perfil = models.CharField(max_length=1, blank=True, default='P')
-    celular = models.CharField(max_length=11, blank=True, null=True)
-
-    USERNAME_FIELD = 'ra'
-    REQUIRED_FIELDS = ['nome','email']
-
-    def __str__(self):
-        return self.nome + '(' + str(self.ra) + ')'
-    class Meta:
-        managed = False
-        db_table = 'professor'
+class Aluno(Usuario):
+    pass
+        
+class Professor(Usuario):
+    pass
 
     
         

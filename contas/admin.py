@@ -7,7 +7,7 @@ from contas.forms import novo_aluno_form
 from contas.forms import novo_professor_form
 
 # Register your models here.
-class Cadastro_Admin(UserAdmin):
+class Aluno_Admin(UserAdmin):
     add_form = novo_aluno_form
     list_display = ('email', 'nome')
     list_filter = ('perfil',)
@@ -17,5 +17,5 @@ class Cadastro_Admin(UserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
-admin.site.register(Aluno, Cadastro_Admin)
-admin.site.register(Professor, Cadastro_Admin)
+admin.site.register(Aluno, Aluno_Admin)
+admin.site.register(Professor)

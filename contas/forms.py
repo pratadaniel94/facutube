@@ -5,14 +5,13 @@ from django.contrib.auth.admin import UserAdmin
 # criando o Formilario de 'USUARIO'/'ALUNO'
 
 class novo_aluno_form(forms.ModelForm):
-
     class meta:
         model = Aluno
         fields = ('ra','email','nome')
-
     def save(self,commit=True):
         user = super(novo_aluno_form,self).save(commit=False)
         user.set_password('123@mudar')
+        user.perfil= 'A'
         if commit:
             user.save()
         return user
@@ -37,6 +36,7 @@ class novo_professor_form(forms.ModelForm):
     def save(self,commit=True):
         user = super(novo_professor_form,self).save(commit=False)
         user.set_password('123@mudar')
+        user.perfil= 'P'
         if commit:
             user.save()
         return user
