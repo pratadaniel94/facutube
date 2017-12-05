@@ -2,8 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Curso(models.Model):
+    #id = models.IntegerField(primary_key=True)
     sigla = models.CharField(unique=True, max_length=5)
     nome = models.CharField(unique=True, max_length=50)
+    objetivo = models.TextField('Obejtivo', blank=True, null= False)
+    perfil_profissional = models.TextField('Perfil Profissional', blank=True, null= False)
+    mercado_trabalho = models.TextField('Mercado de Trabalho', blank=True, null= False)
+
     def __str__(self):
         return self.nome
 

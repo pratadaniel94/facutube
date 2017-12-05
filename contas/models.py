@@ -1,6 +1,6 @@
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         UserManager, models)
-
+from core.models import Curso
 # Create your models here.  
 
 class UsuarioManager(BaseUserManager):
@@ -36,6 +36,9 @@ class Usuario(AbstractBaseUser):
 
     objects = UsuarioManager()
 
+    class Meta:
+        db_table = 'Usuario'
+
     # criando a função de apresentação do 'USUARIO'
     def __str__(self):
         return self.nome + '(' + str(self.ra) + ')'
@@ -59,8 +62,18 @@ class Usuario(AbstractBaseUser):
         return self.perfil == 'C'
     
 class Aluno(Usuario):
-    pass
-        
+    usuario_id = models.OneToOneField(
+        Usuario, 
+        models.DO_NOTHING, db_column='id', 
+        primary_key=True)
+    curso = models.OneToOneField(
+        'core.Curso',
+        models.DO_NOTHING, db_column='curso')
+
+    class Meta:
+        managed = False
+        db_table = 'aluno'
+
 class Professor(Usuario):
     pass
 

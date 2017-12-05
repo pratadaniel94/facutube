@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 class novo_aluno_form(forms.ModelForm):
     class meta:
         model = Aluno
-        fields = ('ra','email','nome')
+        fields = ('ra','email','nome','curso')
     def save(self,commit=True):
         user = super(novo_aluno_form,self).save(commit=False)
         user.set_password('123@mudar')
@@ -20,11 +20,8 @@ class altera_aluno_form(forms.ModelForm):
 
     class Meta:
         model = Aluno
-        fields = ('email','nome')
+        fields = ('email','nome','curso')
 
-class aluno_admin(UserAdmin):
-    form = altera_aluno_form
-    add_form = novo_aluno_form
 
 # --------------------------------------------------------/ Professor /----------------------------------------------------------------------
 # criando o Formilario de 'USUARIO'/'PROFESSOR'
@@ -32,7 +29,7 @@ class novo_professor_form(forms.ModelForm):
 
     class meta:
         model = Professor
-        fields = ('ra','email','nome')
+        fields = ('ra','email','nome',)
     def save(self,commit=True):
         user = super(novo_professor_form,self).save(commit=False)
         user.set_password('123@mudar')
