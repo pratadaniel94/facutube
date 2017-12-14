@@ -44,9 +44,18 @@ def noticia(request):
     contexto = {}
     return render(request,'noticia.html', contexto)
 
+
+def curso(request, sigla):
+    contexto = {
+        "curso":Curso.objects.get(sigla=sigla)
+    }
+    return render(request,"curso.html",contexto)
+
 def cursos(request):
-    contexto = {}
-    return render(request,'curso.html', contexto)
+    contexto = {
+        "cursos" : Curso.objects.all()
+    }
+    return render(request,"curso_list.html",contexto)
 
 def marketing(request):
     contexto = {}
