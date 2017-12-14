@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^contato', contato),
     url(r'^noticia', noticia),
     url(r'^cursos$', cursos),
-    url(r'^curso/([A-Z,a-z]+)', curso, name="curso"),
+    url(r'^curso/([A-Z,a-z]+)', curso),
     url(r'^marketing', marketing),
     url(r'^blogger',blogger ),
     url(r'^desing',desing ),
